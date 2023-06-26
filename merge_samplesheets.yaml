@@ -17,7 +17,7 @@ add_columns: #additional columns to include in the final sample sheet
   - X384.Column
   - Capture.Plate.Name
   - Capture.Plate.Location
-exclude_columns: #additional columns to exclude from the final sample sheet
+exclude_columns: #samples to exclude from the final sample sheet
   - HC
   - 3D7
   - 7G8
