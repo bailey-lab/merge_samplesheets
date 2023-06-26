@@ -32,7 +32,7 @@ mamba activate snakemake
 snakemake -s merge_samplesheets.smk --cores [your_desired_core_count]
 ```
 
-##Help:
+## Help:
 For additional help on Jeff's merge script, try running this command (assuming
 you have access to a computer that is part of the bailey lab group):
 python3 /nfs/jbailey5/baileyweb/bailey_share/bin/mipscripts_v0dev2.py merge_sampleset -h
