@@ -1,0 +1,32 @@
+#parent folder of both sample sheets and merge script
+prefix: /nfs/jbailey5/baileyweb/bailey_share
+output_folder: 230101_merging/ #where output data will go
+merge_script: bin/mipscripts_v0dev2.py #subfolder and file of Jeff's merging script
+output_sheet: mikalayi_merged_sample_sheet.tsv #output merged sample sheet name
+sample_set: JJJ #sample sets to pull from the sample sheets
+probe: IBC #probes to pull from the sample sheets
+samples: #samples to use - includes subfolders of the prefix folder
+  - raw_data/210403_nextseq/210403_samples.tsv
+  - raw_data/210422_nextseq/210422_samples.tsv
+  - raw_data/210528_nextseq/210528_samples.tsv
+  - raw_data/210625_nextseq/210625_samples.tsv
+  - raw_data/210707_nextseq/210707_samples.tsv
+  - raw_data/211108_nextseq/211108_samples.tsv
+  - raw_data/211223_nextseq/211223_samples.tsv
+add_columns: #additional columns to include in the final sample sheet
+  - X384.Column
+  - Capture.Plate.Name
+  - Capture.Plate.Location
+exclude_columns: #additional columns to exclude from the final sample sheet
+  - HC
+  - 3D7
+  - 7G8
+  - LC
+  - NTC
+  - '"HB3"'
+  - DD2
+  - V1S
+  - G8
+  - PMP
+  - NTP
+  - empty
