@@ -1,20 +1,20 @@
 configfile: 'merge_samplesheets.yaml'
-output_root='output_files/'+config['output_folder']
+output_root=config['output_folder']
 
 rule all:
 	input:
-		out_config=output_root+'merge_samplesheets.yaml',
-		out_snakemake=output_root+'merge_samplesheets.smk',
-		sample_sheet=output_root+config['output_sheet'],
-		merged_fastq=output_root+'mergedfastq'
+		out_config=output_root+'/merge_samplesheets.yaml',
+		out_snakemake=output_root+'/merge_samplesheets.smk',
+		sample_sheet=output_root+'/'+config['output_sheet'],
+		merged_fastq=output_root+'/mergedfastq'
 
 rule copy_files:
 	input:
 		in_config='merge_samplesheets.yaml',
 		in_snakemake='merge_samplesheets.smk'
 	output:
-		out_config=output_root+'merge_samplesheets.yaml',
-		out_snakemake=output_root+'merge_samplesheets.smk'
+		out_config=output_root+'/merge_samplesheets.yaml',
+		out_snakemake=output_root+'/merge_samplesheets.smk'
 	shell:
 		'''
 		cp {input.in_config} {output.out_config}
@@ -36,9 +36,9 @@ rule merge_sheets:
 		probe=config['probe'],
 		add_columns=config['add_columns'],
 		exclude_columns=config['exclude_columns'],
-		fastq_folder=output_root+'mergedfastq'
+		fastq_folder=output_root+'/mergedfastq'
 	output:
-		sample_sheet=output_root+config['output_sheet'],
+		sample_sheet=output_root+'/'+config['output_sheet'],
 	run:
 		import subprocess
 		command_string=f'python3 {params.merge_script} {params.operation} --set {params.sample_set}'
@@ -58,12 +58,12 @@ rule merge_fastqs:
 	merges the fastq files using paths from the sample sheet
 	'''
 	input:
-		sample_sheet=output_root+config['output_sheet']
+		sample_sheet=output_root+'/'+config['output_sheet']
 	params:
 		merge_script=config['prefix']+'/'+config['merge_script'],
 		operation='merge_sampleset_write_fastq'
 	output:
-		merged_fastq=directory(output_root+'mergedfastq')
+		merged_fastq=directory(output_root+'/mergedfastq')
 	shell:
 		'python3 {params.merge_script} {params.operation} --mergedsheet {input.sample_sheet} --newfastqdir {output.merged_fastq} --skipbadfastqs'
 		
